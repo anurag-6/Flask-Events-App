@@ -1,0 +1,41 @@
+{% extends 'index.html' %}
+
+{%block title%}
+<title>Passed Event</title>
+{%endblock%}
+
+
+
+{%block home%}
+
+<div class="container">
+  
+    <div class="row p-2">
+      {%for i in data%}
+        <div class="col-12 col-md-4 col-lg-3 m-2" >
+            <div class="card p-2" style="width: 18rem;">
+                <div class="container">
+                  <img  style="object-fit:contain;object-position: center;overflow: hidden;" class="card-img-top" src="../static/uploads/{{i[4]}}" alt="Card image cap" onerror ="this.src='../static/img/card_def.png'" height="150px" width="100px">
+
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{i[1]}}</h5>
+                  <p class="card-text">{{i[2]}}</p>
+                  
+                  {% if i[3] == 'high' %}
+                  <a  class="p-1 bg-danger text-light">{{i[3]}} Priority given</a>
+                  {%elif  i[3] == 'mid' %}  
+                  <a  class="p-1 bg-warning text-light">{{i[3]}} Priority given</a>  
+                  {%elif  i[3] == 'low' %}    
+                  <a  class="p-1 bg-success text-light">{{i[3]}} Priority given</a>  
+                  {%endif%}
+                </div>
+              </div>
+        </div>
+        {%endfor%}    
+    </div>
+  
+</div>
+
+
+{%endblock home%}

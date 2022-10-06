@@ -1,0 +1,91 @@
+{% extends 'index.html'%}
+
+{%block title%}
+<title>Add Event</title>
+
+{%endblock%}
+
+{% block home %}
+
+<div class="container p-1 my-5">
+
+    <h1 class="text-primary text-center p-2"> Add a New Event</h1>
+   
+    <form method="POST" enctype="multipart/form-data" action="{{url_for('add_event')}}">
+
+        {% with messages = get_flashed_messages() %}
+
+        {%if messages %}
+
+        {%for message in messages%}
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong></strong>  {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+       
+
+        {%endfor%}
+
+        {%endif%}
+
+
+        {%endwith%}
+        <div class="form-group">
+           <input type="text" name="event" placeholder="Event Name" class="form-control">
+            
+        </div>
+
+        <div class="form-group">
+            <input type="datetime-local" name="dt" class="form-control">
+            
+        </div>
+
+        <div class="form-group">
+            <select name="prio" class="form-control">
+                <option value="" disabled selected >Select priority</option>
+                <option value="high">
+                   <span class="bg-danger p-2 text-light"> Urgent </span>
+                </option>
+                <option value="mid">
+                   <span class="bg-warning p-2 text-light"> Miidle</span>
+                </option>
+                <option value="low">
+                    <span class="bg-success p-2 text-light"> Low </span>
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="eventimg">Event Photo (Optional)</label>
+            <input type="file" class="form-control" name="pic" multiple onchange="preview()">
+            
+        </div>
+
+        <div class="form-group">
+            <img src="" alt="" id="frame" class="img-fluid"  >
+            
+        </div>
+
+        <div class="form-group">
+             <button class="btn btn-outline-success"> ADD</button>
+            
+        </div>
+
+        
+
+        
+
+    </form>
+
+</div>
+
+<script>
+    function preview(){
+        document.getElementById('frame').src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
+
+{% endblock home %}
